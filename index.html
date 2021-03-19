@@ -263,7 +263,10 @@
                                         <div class="card-body">
                                             Essential Expenses
                                             <div class="text-white-50 small">
-												<p><input onchange="recalculate()" id="essentialexpenses"></input></p>
+												<!--<p><input onchange="recalculate()" id="essentialexpenses"></input></p>-->
+												<p>Mortgage payment: <input class="text-white-50 medium" style="width: 40px; border: none; background-color: rgba(255, 255, 255, 0);" onchange="recalculate()" id="amountmortgage"></input>
+												<br>Other essential expenses: <input class="text-white-50 medium" style="width: 40px; border: none; background-color: rgba(255, 255, 255, 0);" onchange="recalculate()" id="amountessential"></input></p>
+
 											</div>
                                         </div>
                                     </div>
@@ -342,36 +345,22 @@
                             <!-- Illustrations -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="text-center">
-                                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                                            src="img/undraw_posting_photo.svg" alt="">
-                                    </div>
-                                    <p>Add some quality, svg illustrations to your project courtesy of <a
-                                            target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a
-                                        constantly updated collection of beautiful svg images that you can use
-                                        completely free and without attribution!</p>
-                                    <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on
-                                        unDraw &rarr;</a>
-                                </div>
-                            </div>
-
-                            <!-- Approach -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
-                                </div>
-                                <div class="card-body">
-                                    <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce
-                                        CSS bloat and poor page performance. Custom CSS classes are used to create
-                                        custom components and custom utility classes.</p>
-                                    <p class="mb-0">Before working with this theme, you should become familiar with the
-                                        Bootstrap framework, especially the utility classes.</p>
+									<h6 class="m-0 font-weight-bold text-primary">Expenses</h6>
+									<br>
+									<p>Prior to retirement, each month I'll spend: 1000 on the mortgage (paid off 
+									by age 58), 1000 on other essential expenses, 1000 on non-essential expenses, 
+									and 500 on savings. My total annual (non-invested) expenses will be 3500*12. 
+									At this rate, my mortgage will be paid off by age 58.</p>
+                                    <h6 class="m-0 font-weight-bold text-primary">Investments</h6>
+									<br>
+									<p>Prior to retirement, I'll invest 3000 per month. 500 of this will go into an 
+									IRA (matching amount?) and the rest will go into a 401k. I'll plan to retire at 
+									age 45, with 1,500,000 invested in index funds. </p>
+									<h6 class="m-0 font-weight-bold text-primary">Retirement</h6>
+									<br>
+									<p>My post-retirement income due to investments will be around 70000.</p>
                                 </div>
                             </div>
-
                         </div>
                     </div>
 
@@ -458,38 +447,41 @@ var ctx3 = document.getElementById("myPieChart");
 var myPieChart;
 
 function renderPieChart(data) {
-
-
-	// Pie Chart Example
-	myPieChart = new Chart(ctx3, {
-	  type: 'doughnut',
-	  data: {
-		labels: ["Essential", "Non-essential", "Savings", "Investment", "Leftover"],
-		datasets: [{
-		  data: data,
-		  backgroundColor: ['#e74a3b', '#f6c23e', '#36b9cc', '#1cc88a', '#333333'],
-		  hoverBackgroundColor: ['#e74a3b', '#f6c23e', '#36b9cc', '#1cc88a', '#333333'],
-		  hoverBorderColor: "rgba(234, 236, 244, 1)",
-		}],
-	  },
-	  options: {
-		maintainAspectRatio: false,
-		tooltips: {
-		  backgroundColor: "rgb(255,255,255)",
-		  bodyFontColor: "#858796",
-		  borderColor: '#dddfeb',
-		  borderWidth: 1,
-		  xPadding: 15,
-		  yPadding: 15,
-		  displayColors: false,
-		  caretPadding: 10,
-		},
-		legend: {
-		  display: false
-		},
-		cutoutPercentage: 80,
-	  },
-	});
+	if (myPieChart == null) {
+		// Pie Chart Example
+		myPieChart = new Chart(ctx3, {
+		  type: 'doughnut',
+		  data: {
+			labels: ["Essential", "Non-essential", "Savings", "Investment", "Leftover"],
+			datasets: [{
+			  data: data,
+			  backgroundColor: ['#e74a3b', '#f6c23e', '#36b9cc', '#1cc88a', '#333333'],
+			  hoverBackgroundColor: ['#e74a3b', '#f6c23e', '#36b9cc', '#1cc88a', '#333333'],
+			  hoverBorderColor: "rgba(234, 236, 244, 1)",
+			}],
+		  },
+		  options: {
+			maintainAspectRatio: false,
+			tooltips: {
+			  backgroundColor: "rgb(255,255,255)",
+			  bodyFontColor: "#858796",
+			  borderColor: '#dddfeb',
+			  borderWidth: 1,
+			  xPadding: 15,
+			  yPadding: 15,
+			  displayColors: false,
+			  caretPadding: 10,
+			},
+			legend: {
+			  display: false
+			},
+			cutoutPercentage: 80,
+		  },
+		});
+	} else {
+		myPieChart.data.datasets[0].data = data;
+		myPieChart.update();
+	}
 }
 
 </script>
@@ -525,111 +517,136 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 
 var ctx2 = document.getElementById("myAreaChart");
 var myLineChart;
-function renderChart(years, investment, savings) {
+function renderChart(years, investment, savings, mortgage) {
 	// Area Chart Example
-	myLineChart = new Chart(ctx2, {
-	  type: 'line',
-	  data: {
-		labels: years,
-		datasets: [
-			{
-			  label: "Capital",
-			  lineTension: 0.3,
-			  backgroundColor: "rgba(78, 115, 223, 0.05)",
-			  borderColor: "rgba(78, 115, 223, 1)",
-			  pointRadius: 3,
-			  pointBackgroundColor: "rgba(78, 115, 223, 1)",
-			  pointBorderColor: "rgba(78, 115, 223, 1)",
-			  pointHoverRadius: 3,
-			  pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-			  pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-			  pointHitRadius: 10,
-			  pointBorderWidth: 2,
-			  data: investment,
-			},
-			{
-			  label: "Savings",
-			  lineTension: 0.3,
-			  backgroundColor: "rgba(78, 115, 223, 0.05)",
-			  borderColor: "rgba(78, 115, 223, 1)",
-			  pointRadius: 3,
-			  pointBackgroundColor: "rgba(78, 115, 223, 1)",
-			  pointBorderColor: "rgba(78, 115, 223, 1)",
-			  pointHoverRadius: 3,
-			  pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-			  pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-			  pointHitRadius: 10,
-			  pointBorderWidth: 2,
-			  data: savings,
-			}
-		],
-	  },
-	  options: {
-		maintainAspectRatio: false,
-		layout: {
-		  padding: {
-			left: 10,
-			right: 25,
-			top: 25,
-			bottom: 0
-		  }
-		},
-		scales: {
-		  xAxes: [{
-			time: {
-			  unit: 'date'
-			},
-			gridLines: {
-			  display: false,
-			  drawBorder: false
-			},
-			ticks: {
-			  maxTicksLimit: 7
-			}
-		  }],
-		  yAxes: [{
-			ticks: {
-			  maxTicksLimit: 5,
-			  padding: 10,
-			  callback: function(value, index, values) {
-				return '$' + number_format(value);
+	
+	if (myLineChart == null) {
+		myLineChart = new Chart(ctx2, {
+		  type: 'line',
+		  data: {
+			labels: years,
+			datasets: [
+				{
+				  label: "Capital",
+				  lineTension: 0.3,
+				  backgroundColor: "rgba(78, 115, 223, 0.05)",
+				  borderColor: "#1cc88a",
+				  pointRadius: 3,
+				  pointBackgroundColor: "#1cc88a",
+				  pointBorderColor: "#1cc88a",
+				  pointHoverRadius: 3,
+				  pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+				  pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+				  pointHitRadius: 10,
+				  pointBorderWidth: 2,
+				  data: investment,
+				},
+				{
+				  label: "Savings",
+				  lineTension: 0.3,
+				  backgroundColor: "rgba(78, 115, 223, 0.05)",
+				  borderColor: "#36b9cc",
+				  pointRadius: 3,
+				  pointBackgroundColor: "#36b9cc",
+				  pointBorderColor: "#36b9cc",
+				  pointHoverRadius: 3,
+				  pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+				  pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+				  pointHitRadius: 10,
+				  pointBorderWidth: 2,
+				  data: savings,
+				},
+				{
+				  label: "Mortgage",
+				  lineTension: 0.3,
+				  backgroundColor: "rgba(78, 115, 223, 0.05)",
+				  borderColor: "#e74a3b",
+				  pointRadius: 3,
+				  pointBackgroundColor: "#e74a3b",
+				  pointBorderColor: "#e74a3b",
+				  pointHoverRadius: 3,
+				  pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+				  pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+				  pointHitRadius: 10,
+				  pointBorderWidth: 2,
+				  data: mortgage,
+				}
+			],
+		  },
+		  options: {
+			maintainAspectRatio: false,
+			layout: {
+			  padding: {
+				left: 10,
+				right: 25,
+				top: 25,
+				bottom: 0
 			  }
 			},
-			gridLines: {
-			  color: "rgb(234, 236, 244)",
-			  zeroLineColor: "rgb(234, 236, 244)",
-			  drawBorder: false,
-			  borderDash: [2],
-			  zeroLineBorderDash: [2]
-			}
-		  }],
-		},
-		legend: {
-		  display: false
-		},
-		tooltips: {
-		  backgroundColor: "rgb(255,255,255)",
-		  bodyFontColor: "#858796",
-		  titleMarginBottom: 10,
-		  titleFontColor: '#6e707e',
-		  titleFontSize: 14,
-		  borderColor: '#dddfeb',
-		  borderWidth: 1,
-		  xPadding: 15,
-		  yPadding: 15,
-		  displayColors: false,
-		  intersect: false,
-		  mode: 'index',
-		  caretPadding: 10,
-		  callbacks: {
-			label: function(tooltipItem, chart) {
-			  var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-			  return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+			scales: {
+			  xAxes: [{
+				time: {
+				  unit: 'date'
+				},
+				gridLines: {
+				  display: false,
+				  drawBorder: false
+				},
+				ticks: {
+				  maxTicksLimit: 7
+				}
+			  }],
+			  yAxes: [{
+				ticks: {
+				  maxTicksLimit: 5,
+				  padding: 10,
+				  callback: function(value, index, values) {
+					return '$' + number_format(value);
+				  }
+				},
+				gridLines: {
+				  color: "rgb(234, 236, 244)",
+				  zeroLineColor: "rgb(234, 236, 244)",
+				  drawBorder: false,
+				  borderDash: [2],
+				  zeroLineBorderDash: [2]
+				}
+			  }],
+			},
+			legend: {
+			  display: false
+			},
+			tooltips: {
+			  backgroundColor: "rgb(255,255,255)",
+			  bodyFontColor: "#858796",
+			  titleMarginBottom: 10,
+			  titleFontColor: '#6e707e',
+			  titleFontSize: 14,
+			  borderColor: '#dddfeb',
+			  borderWidth: 1,
+			  xPadding: 15,
+			  yPadding: 15,
+			  displayColors: false,
+			  intersect: false,
+			  mode: 'index',
+			  caretPadding: 10,
+			  callbacks: {
+				label: function(tooltipItem, chart) {
+				  var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+				  return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+				}
+			  }
 			}
 		  }
-		}
-	  }
-	});
+		});
+	} else {
+		console.log("Updating chart");
+		myLineChart.data.datasets[0].data = investment;
+		myLineChart.data.datasets[1].data = savings;
+		myLineChart.data.datasets[2].data = mortgage;
+
+		myLineChart.update();
+	}
 }
 
 // MORE STUFF ----------------------
@@ -640,8 +657,10 @@ var data = {
 	"startupsalary": 0,
 	"amountinvested": 3000,
 	"amountsaved": 500,
-	"essentialexpenses": 2000,
-	"nonessentialexpenses": 1000,
+	"amountessential": 500,
+	"amountmortgage": 1000,
+	"nonessentialexpenses": 500,
+	"mortgage": 400000,
 	"leftover": 0
 };
 
@@ -654,7 +673,8 @@ window.onload = function() {
 	
 	document.getElementById('amountinvested').value = data["amountinvested"];
 	document.getElementById('amountsaved').value = data["amountsaved"];
-	document.getElementById('essentialexpenses').value = data["essentialexpenses"];
+	document.getElementById('amountessential').value = data["amountessential"];
+	document.getElementById('amountmortgage').value = data["amountmortgage"];
 	document.getElementById('nonessentialexpenses').value = data["nonessentialexpenses"];
 	document.getElementById('leftover').value = data["leftover"];
 
@@ -668,14 +688,39 @@ function recalculate() {
 	data["mysalary"] = document.getElementById('mysalary').value;
 	data["spousesalary"] = document.getElementById('spousesalary').value;
 	data["startupsalary"] = document.getElementById('startupsalary').value;
-	data["totalincomeaftertaxes"] = parseInt(data["mysalary"] || 0) + parseInt(data["spousesalary"] || 0) + parseInt(data["startupsalary"] || 0);
+	var taxableincome = parseInt(data["mysalary"] || 0) + parseInt(data["spousesalary"] || 0) + parseInt(data["startupsalary"] || 0);
+	
+	var taxexempt = 0;
+	
+	taxableincome -= taxexempt;
+	
+	var taxes = 0;
+	if (taxableincome < 9875)
+		taxes = taxableincome * 0.1
+	else if (taxableincome < 40125)
+		taxes = 987.5 + (taxableincome-9875)*0.12
+	else if (taxableincome < 85525)
+		taxes = 4617.5 + (taxableincome-40125)*0.22
+	else if (taxableincome < 163300)
+		taxes = 14605.5 + (taxableincome-85525)*0.24
+	else if (taxableincome < 207350)
+		taxes = 33271.5 + (taxableincome-163300)*0.32
+	else if (taxableincome < 518400)
+		taxes = 47367.5 + (taxableincome-207350)*0.35
+	else
+		taxes = 156235 + (taxableincome-518400)*0.37
+	
+	var statetax = 0.0475 * taxableincome + 0.03 * taxableincome
+	var ficatax = 0; // Need to calculate FICA tax
+	data["totalincomeaftertaxes"] = taxableincome + taxexempt - taxes - statetax;
 	
 	data["amountinvested"] = document.getElementById('amountinvested').value;
 	data["amountsaved"] = document.getElementById('amountsaved').value;
-	data["essentialexpenses"] = document.getElementById('essentialexpenses').value;
+	data["amountmortgage"] = document.getElementById('amountmortgage').value;
+	data["amountessential"] = document.getElementById('amountessential').value;
 	data["nonessentialexpenses"] = document.getElementById('nonessentialexpenses').value;
 
-	data["leftover"] = data["totalincomeaftertaxes"]/12 - data["essentialexpenses"] - data["nonessentialexpenses"] - data["amountinvested"] - data["amountsaved"];
+	data["leftover"] = data["totalincomeaftertaxes"]/12 - data["amountessential"] - data["amountmortgage"] - data["nonessentialexpenses"] - data["amountinvested"] - data["amountsaved"];
 	
 	// Display this data
 
@@ -690,10 +735,13 @@ function recalculate() {
 	var years = [];
 	var investment = [];
 	var savings = [];
+	var mortgagedebt = [];
 	
 	var retirementage = 45;
 	var retirementexpenses = 70000;
 	var savingscounter = 0;
+	var mortgageamount = parseInt(data["mortgage"]);
+	var mortgagepayment = parseInt(data["amountmortgage"]);
 	
 	var i;
 	var last = 0;
@@ -701,28 +749,53 @@ function recalculate() {
 		last = (last + data["amountinvested"]*12) * 1.07;
 		savingscounter += data["amountsaved"]*12;
 		
+		if (mortgageamount > 0)
+			mortgageamount -= mortgagepayment*12;
+		
+		if (mortgageamount < 0)
+			mortgageamount = 0;
+		
 		years.push(i.toString());
 		investment.push(last.toString());
 		savings.push(savingscounter.toString());
+		if (mortgageamount > 0)
+			mortgagedebt.push(mortgageamount);
+		
+		if (i % 15 == 0 && savingscounter >= 20000) {
+			savingscounter -= 20000;
+		}
 	}
 	
 	for (i = retirementage; i <= 80; i++) {
 		last = (last - retirementexpenses) * 1.04;
 		
+		if (mortgageamount > 0)
+			mortgageamount -= mortgagepayment*12;
+		
+		if (mortgageamount < 0)
+			mortgageamount = 0;
+		
 		years.push(i.toString());
 		savings.push(savingscounter.toString());
+		
+		if (mortgageamount > 0)
+			mortgagedebt.push(mortgageamount);
 		
 		if (last > 0) {
 			investment.push(last.toString());
 		} else {
 			investment.push(0);
 		}
+		
+		if (i % 15 == 0 && savingscounter >= 20000) {
+			savingscounter -= 20000;
+		}
 	}
-	
+		
 	var temp = parseInt(data["totalincomeaftertaxes"])/12;
 	
-	renderChart(years, investment, savings);
-	renderPieChart([data["essentialexpenses"]/temp*100, data["nonessentialexpenses"]/temp*100, data["amountsaved"]/temp*100, data["amountinvested"]/temp*100, data["leftover"]/temp*100]);
+	renderChart(years, investment, savings, mortgagedebt);
+	renderPieChart([(parseInt(data["amountessential"]) + parseInt(data["amountmortgage"]))/temp*100, data["nonessentialexpenses"]/temp*100, data["amountsaved"]/temp*100, data["amountinvested"]/temp*100, data["leftover"]/temp*100]);
 }
 
 </script>
