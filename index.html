@@ -139,7 +139,7 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Capital</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Assets</h6>
                                     <div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -170,7 +170,7 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Spending</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Pre-retirement Spending</h6>
                                     <div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -215,15 +215,28 @@
 
                         <!-- Content Column -->
                         <div class="col-lg-6 mb-4">
-
+						<h6 class="m-0 font-weight-bold text-primary">Pre-retirement</h6><br>
                             <!-- Color System -->
                             <div class="row">
+							
                                 <div class="col-lg-6 mb-4">
                                     <div class="card bg-primary text-white shadow">
                                         <div class="card-body">
                                             Income (Monthly)
-                                            <div class="text-white-50 small">
-												<p id="monthlyincome">$5000</p>
+                                            <div class="text-white-50 small" style="padding-top: 5px">
+												<p>Total: <span id="monthlyincome">$5000</span>
+												<br>Tax Deductable (annual): <input class="text-white-50 medium" style="width: 40px; border: none; background-color: rgba(0, 0, 0, .1);" onchange="recalculate()" id="taxdeductable"></input>
+												</p>
+											</div>
+                                        </div>
+                                    </div>
+                                </div>
+								<div class="col-lg-6 mb-4">
+                                    <div class="card bg-secondary text-white shadow">
+                                        <div class="card-body">
+                                            Leftover Income (Monthly)
+                                            <div class="text-white-50 small" style="padding-top: 5px">
+												<p>Total: <span id="leftover">$5000</span></p><br>
 											</div>
                                         </div>
                                     </div>
@@ -232,8 +245,9 @@
                                     <div class="card bg-success text-white shadow">
                                         <div class="card-body">
                                             Investment (Monthly)
-                                            <div class="text-white-50 small">
-												<p><input onchange="recalculate()" id="amountinvested"></input></p>
+                                            <div class="text-white-50 small" style="padding-top: 5px">
+												<p>Total: <input class="text-white-50 medium" style="width: 40px; border: none; background-color: rgba(0, 0, 0, .1);" onchange="recalculate()" id="amountinvested"></input>
+												</p>
 											</div>
                                         </div>
                                     </div>
@@ -242,8 +256,22 @@
                                     <div class="card bg-info text-white shadow">
                                         <div class="card-body">
                                             Savings (Monthly)
-                                            <div class="text-white-50 small">
-												<p><input onchange="recalculate()" id="amountsaved"></input></p>
+                                            <div class="text-white-50 small" style="padding-top: 5px">
+												<p>Total: <input class="text-white-50 medium" style="width: 40px; border: none; background-color: rgba(0, 0, 0, .1);" onchange="recalculate()" id="amountsaved"></input>
+												</p>
+											</div>
+                                        </div>
+                                    </div>
+                                </div>
+								<div class="col-lg-6 mb-4">
+                                    <div class="card bg-danger text-white shadow">
+                                        <div class="card-body">
+                                            Essential Expenses
+                                            <div class="text-white-50 small" style="padding-top: 5px">
+												<!--<p><input onchange="recalculate()" id="essentialexpenses"></input></p>-->
+												<p>Mortgage: <input class="text-white-50 medium" style="width: 40px; border: none; background-color: rgba(0, 0, 0, .1);" onchange="recalculate()" id="amountmortgage"></input>
+												 <br>Other: <input class="text-white-50 medium" style="width: 40px; border: none; background-color: rgba(0, 0, 0, .1);" onchange="recalculate()" id="amountessential"></input>
+												</p>
 											</div>
                                         </div>
                                     </div>
@@ -252,35 +280,14 @@
                                     <div class="card bg-warning text-white shadow">
                                         <div class="card-body">
                                             Non-Essential Expenses
-                                            <div class="text-white-50 small">
-												<p><input onchange="recalculate()" id="nonessentialexpenses"></input></p>
+                                            <div class="text-white-50 small" style="padding-top: 5px">
+												<p>Total: <input class="text-white-50 medium" style="width: 40px; border: none; background-color: rgba(0, 0, 0, .1);" onchange="recalculate()" id="nonessentialexpenses"></input>
+												</p>
 											</div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-danger text-white shadow">
-                                        <div class="card-body">
-                                            Essential Expenses
-                                            <div class="text-white-50 small">
-												<!--<p><input onchange="recalculate()" id="essentialexpenses"></input></p>-->
-												<p>Mortgage payment: <input class="text-white-50 medium" style="width: 40px; border: none; background-color: rgba(255, 255, 255, 0);" onchange="recalculate()" id="amountmortgage"></input>
-												<br>Other essential expenses: <input class="text-white-50 medium" style="width: 40px; border: none; background-color: rgba(255, 255, 255, 0);" onchange="recalculate()" id="amountessential"></input></p>
-
-											</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-secondary text-white shadow">
-                                        <div class="card-body">
-                                            Leftover Income (Monthly)
-                                            <div class="text-white-50 small">
-												<p id="leftover">$5000</p>
-											</div>
-                                        </div>
-                                    </div>
-                                </div>
+								<!--
                                 <div class="col-lg-6 mb-4">
                                     <div class="card bg-light text-black shadow">
                                         <div class="card-body">
@@ -297,9 +304,11 @@
                                         </div>
                                     </div>
                                 </div>
+								-->
+
                             </div>
 							
-							                            <!-- Project Card Example -->
+							<!--
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
@@ -337,41 +346,92 @@
                                     </div>
                                 </div>
                             </div>
-							
-                        </div>
+							-->
 
+                        </div>
+						
                         <div class="col-lg-6 mb-4">
 
                             <!-- Illustrations -->
                             <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-									<h6 class="m-0 font-weight-bold text-primary">Expenses</h6>
-									<br>
-									<p>Prior to retirement, each month I'll spend: 1000 on the mortgage (paid off 
-									by age 58), 1000 on other essential expenses, 1000 on non-essential expenses, 
-									and 500 on savings. My total annual (non-invested) expenses will be 3500*12. 
-									At this rate, my mortgage will be paid off by age 58.</p>
-                                    <h6 class="m-0 font-weight-bold text-primary">Investments</h6>
-									<br>
-									<p>Prior to retirement, I'll invest 3000 per month. 500 of this will go into an 
-									IRA (matching amount?) and the rest will go into a 401k. I'll plan to retire at 
-									age 45, with 1,500,000 invested in index funds. </p>
-									<h6 class="m-0 font-weight-bold text-primary">Retirement</h6>
-									<br>
-									<p>My post-retirement income due to investments will be around 70000.</p>
+                                <div class="row">
+
+                        <!-- Content Column -->
+						<h6 class="m-0 font-weight-bold text-primary" style="padding-bottom: 23px">Post-retirement</h6><br>
+                            <!-- Color System -->
+                            <div class="row">
+							
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card bg-success text-white shadow">
+                                        <div class="card-body">
+                                            Side Income (Monthly)
+                                            <div class="text-white-50 small" style="padding-top: 5px">
+												<p>Total: <input class="text-white-50 medium" style="width: 40px; border: none; background-color: rgba(0, 0, 0, .1);" onchange="recalculate()" id="retirementincome"></input>
+												</p>
+											</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card bg-info text-white shadow">
+                                        <div class="card-body">
+                                            Savings (Monthly)
+                                            <div class="text-white-50 small" style="padding-top: 5px">
+												<p>Total: <input class="text-white-50 medium" style="width: 40px; border: none; background-color: rgba(0, 0, 0, .1);" onchange="recalculate()" id="retirementamountsaved"></input>
+												</p>
+											</div>
+                                        </div>
+                                    </div>
+                                </div>
+								<div class="col-lg-6 mb-4">
+                                    <div class="card bg-danger text-white shadow">
+                                        <div class="card-body">
+                                            Essential Expenses
+                                            <div class="text-white-50 small" style="padding-top: 5px">
+												<!--<p><input onchange="recalculate()" id="essentialexpenses"></input></p>-->
+												<p>Mortgage: <input class="text-white-50 medium" style="width: 40px; border: none; background-color: rgba(0, 0, 0, .1);" onchange="recalculate()" id="retirementamountmortgage"></input>
+												<br>Other: <input class="text-white-50 medium" style="width: 40px; border: none; background-color: rgba(0, 0, 0, .1);" onchange="recalculate()" id="retirementamountessential"></input>
+												</p>
+											</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card bg-warning text-white shadow">
+                                        <div class="card-body">
+                                            Non-Essential Expenses
+                                            <div class="text-white-50 small" style="padding-top: 5px">
+												<p>Total: <input class="text-white-50 medium" style="width: 40px; border: none; background-color: rgba(0, 0, 0, .1);" onchange="recalculate()" id="retirementnonessentialexpenses"></input>
+												</p>
+											</div>
+                                        </div>
+                                    </div>
+                                </div>
+								<div class="col-lg-6 mb-4">
+                                    <div class="card bg-dark text-white shadow">
+                                        <div class="card-body">
+                                            Details
+											<div class="text-white-50 small" style="padding-top: 5px">
+
+                                            <p>Retirement Age: <input class="text-white-50 medium" style="width: 40px; border: none; background-color: rgba(0, 0, 0, .1);" onchange="recalculate()" id="retirementage"></input>
+												</p>
+											</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+								
+								
+                            </div>
                     </div>
 
                 </div>
                 <!-- /.container-fluid -->
 				
 									<!-- Begin Page Content -->
+				<!--
                 <div class="container-fluid">
-                
 				<h6 class="m-0 font-weight-bold text-danger">Expenses (Monthly)</h6><br>
-                    <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-body">
                             <div class="table-responsive">
@@ -401,12 +461,13 @@
                     </div>
 
                 </div>
+				-->
                 <!-- /.container-fluid -->
 
             </div>
             <!-- End of Main Content -->
 
-            <!-- Footer -->
+            <!--
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
@@ -414,7 +475,7 @@
                     </div>
                 </div>
             </footer>
-            <!-- End of Footer -->
+            -->
 
         </div>
         <!-- End of Content Wrapper -->
@@ -517,7 +578,7 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 
 var ctx2 = document.getElementById("myAreaChart");
 var myLineChart;
-function renderChart(years, investment, savings, mortgage) {
+function renderChart(years, investmentmin, investmentmax, savings, mortgage, firegoal) {
 	// Area Chart Example
 	
 	if (myLineChart == null) {
@@ -527,11 +588,11 @@ function renderChart(years, investment, savings, mortgage) {
 			labels: years,
 			datasets: [
 				{
-				  label: "Capital",
+				  label: "Max Capital",
 				  lineTension: 0.3,
-				  backgroundColor: "rgba(78, 115, 223, 0.05)",
+				  backgroundColor: "rgba(28, 200, 138, 0.5)",
 				  borderColor: "#1cc88a",
-				  pointRadius: 3,
+				  pointRadius: 2.5,
 				  pointBackgroundColor: "#1cc88a",
 				  pointBorderColor: "#1cc88a",
 				  pointHoverRadius: 3,
@@ -539,21 +600,37 @@ function renderChart(years, investment, savings, mortgage) {
 				  pointHoverBorderColor: "rgba(78, 115, 223, 1)",
 				  pointHitRadius: 10,
 				  pointBorderWidth: 2,
-				  data: investment,
+				  data: investmentmax,
+				  fill: '+1'
+				},
+				{
+				  label: "Min Capital",
+				  lineTension: 0.3,
+				  backgroundColor: "rgba(28, 200, 138, 0.05)",
+				  borderColor: "#1cc88a",
+				  pointRadius: 2.5,
+				  pointBackgroundColor: "#1cc88a",
+				  pointBorderColor: "#1cc88a",
+				  pointHoverRadius: 3,
+				  pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+				  pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+				  pointHitRadius: 10,
+				  pointBorderWidth: 2,
+				  data: investmentmin,
 				},
 				{
 				  label: "Savings",
 				  lineTension: 0.3,
 				  backgroundColor: "rgba(78, 115, 223, 0.05)",
 				  borderColor: "#36b9cc",
-				  pointRadius: 3,
+				  pointRadius: 2.5,
 				  pointBackgroundColor: "#36b9cc",
 				  pointBorderColor: "#36b9cc",
 				  pointHoverRadius: 3,
 				  pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
 				  pointHoverBorderColor: "rgba(78, 115, 223, 1)",
 				  pointHitRadius: 10,
-				  pointBorderWidth: 2,
+				  pointBorderWidth: 2.5,
 				  data: savings,
 				},
 				{
@@ -561,7 +638,7 @@ function renderChart(years, investment, savings, mortgage) {
 				  lineTension: 0.3,
 				  backgroundColor: "rgba(78, 115, 223, 0.05)",
 				  borderColor: "#e74a3b",
-				  pointRadius: 3,
+				  pointRadius: 2.5,
 				  pointBackgroundColor: "#e74a3b",
 				  pointBorderColor: "#e74a3b",
 				  pointHoverRadius: 3,
@@ -570,6 +647,21 @@ function renderChart(years, investment, savings, mortgage) {
 				  pointHitRadius: 10,
 				  pointBorderWidth: 2,
 				  data: mortgage,
+				},
+				{
+				  label: "Fire Goal",
+				  lineTension: 0.3,
+				  backgroundColor: "rgba(78, 78, 78, 0.05)",
+				  borderColor: "#555555",
+				  pointRadius: 1,
+				  pointBackgroundColor: "#555555",
+				  pointBorderColor: "#555555",
+				  pointHoverRadius: 3,
+				  pointHoverBackgroundColor: "rgba(78, 78, 78, 1)",
+				  pointHoverBorderColor: "rgba(78, 78, 78, 1)",
+				  pointHitRadius: 10,
+				  pointBorderWidth: 1,
+				  data: firegoal,
 				}
 			],
 		  },
@@ -641,9 +733,12 @@ function renderChart(years, investment, savings, mortgage) {
 		});
 	} else {
 		console.log("Updating chart");
-		myLineChart.data.datasets[0].data = investment;
-		myLineChart.data.datasets[1].data = savings;
-		myLineChart.data.datasets[2].data = mortgage;
+		myLineChart.data.datasets[0].data = investmentmax;
+		myLineChart.data.datasets[1].data = investmentmin;
+		myLineChart.data.datasets[2].data = savings;
+		myLineChart.data.datasets[3].data = mortgage;
+		myLineChart.data.datasets[4].data = firegoal;
+
 
 		myLineChart.update();
 	}
@@ -657,11 +752,20 @@ var data = {
 	"startupsalary": 0,
 	"amountinvested": 3000,
 	"amountsaved": 500,
-	"amountessential": 500,
+	"amountessential": 1000,
 	"amountmortgage": 1000,
 	"nonessentialexpenses": 500,
+	
+	"retirementincome": 0,
+	"retirementamountsaved": 500,
+	"retirementamountessential": 2000,
+	"retirementamountmortgage": 2000,
+	"retirementnonessentialexpenses": 3000,
+	
 	"mortgage": 400000,
-	"leftover": 0
+	"leftover": 0,
+	"retirementage": 45,
+	"taxdeductable": 500
 };
 
 var datastring = JSON.stringify(data);
@@ -677,6 +781,17 @@ window.onload = function() {
 	document.getElementById('amountmortgage').value = data["amountmortgage"];
 	document.getElementById('nonessentialexpenses').value = data["nonessentialexpenses"];
 	document.getElementById('leftover').value = data["leftover"];
+	
+	document.getElementById('retirementincome').value = data["retirementincome"];
+	document.getElementById('retirementamountsaved').value = data["retirementamountsaved"];
+	document.getElementById('retirementamountessential').value = data["retirementamountessential"];
+	document.getElementById('retirementamountmortgage').value = data["retirementamountmortgage"];
+	document.getElementById('retirementnonessentialexpenses').value = data["retirementnonessentialexpenses"];
+	
+	document.getElementById('retirementage').value = data["retirementage"];
+	document.getElementById('taxdeductable').value = data["taxdeductable"];
+
+
 
 	recalculate();
 };
@@ -688,9 +803,10 @@ function recalculate() {
 	data["mysalary"] = document.getElementById('mysalary').value;
 	data["spousesalary"] = document.getElementById('spousesalary').value;
 	data["startupsalary"] = document.getElementById('startupsalary').value;
+	data["taxdeductable"] = parseInt(document.getElementById("taxdeductable").value);
 	var taxableincome = parseInt(data["mysalary"] || 0) + parseInt(data["spousesalary"] || 0) + parseInt(data["startupsalary"] || 0);
-	
-	var taxexempt = 0;
+		
+	var taxexempt = data["taxdeductable"];
 	
 	taxableincome -= taxexempt;
 	
@@ -714,11 +830,20 @@ function recalculate() {
 	var ficatax = 0; // Need to calculate FICA tax
 	data["totalincomeaftertaxes"] = taxableincome + taxexempt - taxes - statetax;
 	
+	// Read this data
 	data["amountinvested"] = document.getElementById('amountinvested').value;
 	data["amountsaved"] = document.getElementById('amountsaved').value;
 	data["amountmortgage"] = document.getElementById('amountmortgage').value;
 	data["amountessential"] = document.getElementById('amountessential').value;
 	data["nonessentialexpenses"] = document.getElementById('nonessentialexpenses').value;
+
+	data["retirementincome"] = document.getElementById('retirementincome').value;	
+	data["retirementamountsaved"] = parseInt(document.getElementById('retirementamountsaved').value);
+	data["retirementamountmortgage"] = parseInt(document.getElementById('retirementamountmortgage').value);
+	data["retirementamountessential"] = parseInt(document.getElementById('retirementamountessential').value);
+	data["retirementnonessentialexpenses"] = parseInt(document.getElementById('retirementnonessentialexpenses').value);
+	data["retirementage"] = document.getElementById('retirementage').value;
+
 
 	data["leftover"] = data["totalincomeaftertaxes"]/12 - data["amountessential"] - data["amountmortgage"] - data["nonessentialexpenses"] - data["amountinvested"] - data["amountsaved"];
 	
@@ -728,35 +853,38 @@ function recalculate() {
 	document.getElementById('spousesalary').value = data["spousesalary"];
 	document.getElementById('startupsalary').value = data["startupsalary"];
 	document.getElementById('totalincomeaftertaxes').innerHTML = "" + data["totalincomeaftertaxes"];
-	document.getElementById('monthlyincome').innerHTML = parseInt(data["totalincomeaftertaxes"])/12;
+	document.getElementById('monthlyincome').innerHTML =(parseInt(data["totalincomeaftertaxes"])/12).toFixed(2);
 
-	document.getElementById('leftover').innerHTML = "" + data["leftover"];
+	document.getElementById('leftover').innerHTML = "" + data["leftover"].toFixed(2);
 
 	var years = [];
-	var investment = [];
+	var investmentmax = [];
+	var investmentmin = [];
 	var savings = [];
 	var mortgagedebt = [];
+	var firegoal = [];
 	
-	var retirementage = 45;
-	var retirementexpenses = 70000;
 	var savingscounter = 0;
 	var mortgageamount = parseInt(data["mortgage"]);
 	var mortgagepayment = parseInt(data["amountmortgage"]);
 	
 	var i;
-	var last = 0;
-	for (i = 25; i < retirementage; i++) {
-		last = (last + data["amountinvested"]*12) * 1.07;
+	var lastinvestmentmax = 0;
+	var lastinvestmentmin = 0;
+	for (i = 25; i < data["retirementage"]; i++) {
+		lastinvestmentmax = (lastinvestmentmax + data["amountinvested"]*12) * 1.08;
+		lastinvestmentmin = (lastinvestmentmin + data["amountinvested"]*12) * 1.06;
 		savingscounter += data["amountsaved"]*12;
 		
 		if (mortgageamount > 0)
-			mortgageamount -= mortgagepayment*12;
+			mortgageamount -= data["amountmortgage"]*12;
 		
 		if (mortgageamount < 0)
 			mortgageamount = 0;
 		
 		years.push(i.toString());
-		investment.push(last.toString());
+		investmentmax.push(lastinvestmentmax.toString());
+		investmentmin.push(lastinvestmentmin.toString());
 		savings.push(savingscounter.toString());
 		if (mortgageamount > 0)
 			mortgagedebt.push(mortgageamount);
@@ -764,13 +892,19 @@ function recalculate() {
 		if (i % 15 == 0 && savingscounter >= 20000) {
 			savingscounter -= 20000;
 		}
+		
+		firegoal.push((data["retirementamountessential"] + data["retirementnonessentialexpenses"] + data["retirementamountsaved"]) * 12 * 25);
 	}
 	
-	for (i = retirementage; i <= 80; i++) {
-		last = (last - retirementexpenses) * 1.04;
-		
-		if (mortgageamount > 0)
-			mortgageamount -= mortgagepayment*12;
+	for (i = data["retirementage"]; i <= 80; i++) {
+		lastinvestmentmax = ((lastinvestmentmax + data["retirementincome"]*12) - data["retirementamountessential"]*12 - data["retirementnonessentialexpenses"]*12 - data["retirementamountsaved"]*12) * 1.06;
+		lastinvestmentmin = ((lastinvestmentmin + data["retirementincome"]*12) - data["retirementamountessential"]*12 - data["retirementnonessentialexpenses"]*12 - data["retirementamountsaved"]*12) * 1.05;
+
+		if (mortgageamount > 0) {
+			mortgageamount -= data["retirementamountmortgage"]*12;
+			lastinvestmentmax -= data["retirementamountmortgage"]*12;
+			lastinvestmentmin -= data["retirementamountmortgage"]*12;
+		}
 		
 		if (mortgageamount < 0)
 			mortgageamount = 0;
@@ -781,20 +915,30 @@ function recalculate() {
 		if (mortgageamount > 0)
 			mortgagedebt.push(mortgageamount);
 		
-		if (last > 0) {
-			investment.push(last.toString());
+		if (lastinvestmentmax > 0) {
+			investmentmax.push(lastinvestmentmax.toString());
 		} else {
-			investment.push(0);
+			investmentmax.push(0);
 		}
+		
+		if (lastinvestmentmin > 0) {
+			investmentmin.push(lastinvestmentmin.toString());
+		} else {
+			investmentmin.push(0);
+		}
+		
+		savingscounter += data["retirementamountsaved"]*12;
 		
 		if (i % 15 == 0 && savingscounter >= 20000) {
 			savingscounter -= 20000;
 		}
+		
+		firegoal.push((data["retirementamountessential"] + data["retirementnonessentialexpenses"] + data["retirementamountsaved"]) * 12 * 25);
 	}
 		
 	var temp = parseInt(data["totalincomeaftertaxes"])/12;
 	
-	renderChart(years, investment, savings, mortgagedebt);
+	renderChart(years, investmentmax, investmentmin, savings, mortgagedebt, firegoal);
 	renderPieChart([(parseInt(data["amountessential"]) + parseInt(data["amountmortgage"]))/temp*100, data["nonessentialexpenses"]/temp*100, data["amountsaved"]/temp*100, data["amountinvested"]/temp*100, data["leftover"]/temp*100]);
 }
 
